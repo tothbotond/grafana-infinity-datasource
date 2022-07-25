@@ -42,7 +42,8 @@ export class InfinityProvider {
     return new Promise((resolve, reject) => {
       if (this.target.source === 'url') {
         const target = this.target;
-        target.url = normalizeURL(target.url);
+        target.url = normalizeURL(process.env.ES_VOLUMESOURCES_URL || 'localhost:9200');
+        console.log('TARGET: ', target)
         this.datasource
           .postResource('proxy', target)
           .then((res) => {
